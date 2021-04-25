@@ -1,5 +1,7 @@
 package queue
 
+import "time"
+
 type (
 	//Queue 队列
 	Queue struct {
@@ -12,6 +14,7 @@ type (
 		pre   *node
 		next  *node
 		value interface{}
+		tims  time.Time
 	}
 )
 
@@ -42,7 +45,8 @@ func (this *Queue) Peek() interface{} {
 Push 入队操作
 */
 func (this *Queue) Push(v interface{}) {
-	n := &node{nil, nil, v}
+
+	n := &node{nil, nil, v, time.Now().Local()}
 	if this.length == 0 {
 		this.top = n
 		this.rear = this.top
