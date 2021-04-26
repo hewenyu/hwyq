@@ -7,10 +7,10 @@ import (
 
 func Test_Server(t *testing.T) {
 
+	var num = 0
 	listener := NewServer()
 
 	defer listener.Close()
-	// var num int
 
 	for {
 		conn, err := listener.Accept()
@@ -18,6 +18,10 @@ func Test_Server(t *testing.T) {
 			fmt.Println("accept err:", err)
 		}
 		go listener.Process(conn)
+
+		num++
+
+		fmt.Println(num)
 
 	}
 

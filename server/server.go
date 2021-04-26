@@ -13,10 +13,12 @@ const DefultPort = 8950
 ConnectQueue 链接
 */
 type ConnectQueue struct {
-	Listener *net.TCPListener // 链接
-	Ques     *queue.Queue
-	PopChan  *chan int
-	PushChan *chan int
+	Listener   *net.TCPListener // 链接
+	Ques       *queue.Queue     // 消息队列的主要链表
+	PopChan    *chan int        // 限制最高连接数
+	PushChan   *chan int        // 限制最高连接数
+	PopLength  int              // 用于统计队列
+	PushLength int              // 用于统计队列
 }
 
 /*
@@ -45,10 +47,12 @@ func NewServer() *ConnectQueue {
 	listener, _ := net.ListenTCP("tcp", &net.TCPAddr{IP: net.IPv4zero, Port: DefultPort})
 
 	server := ConnectQueue{
-		Listener: listener,
-		Ques:     queue.New(),
-		PopChan:  MakeChanInt(LimitFork),
-		PushChan: MakeChanInt(LimitFork),
+		Listener:   listener,
+		Ques:       queue.New(),
+		PopChan:    MakeChanInt(LimitFork),
+		PushChan:   MakeChanInt(LimitFork),
+		PopLength:  0,
+		PushLength: 0,
 	}
 
 	return &server
