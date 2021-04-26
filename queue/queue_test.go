@@ -12,9 +12,9 @@ func push() {
 
 	var message string
 	for {
-		message = "你好" + time.Now().Local().String()
+		message = time.Now().Local().String()
 		server.Push(message)
-		time.Sleep(time.Second * 5)
+		time.Sleep(time.Second / 10)
 	}
 }
 
@@ -24,7 +24,7 @@ func pop() {
 		if resut != nil {
 			fmt.Println(resut)
 		}
-		time.Sleep(time.Second * 1)
+		// time.Sleep(time.Second * 1)
 	}
 }
 

@@ -1,6 +1,8 @@
 package db
 
-import "os"
+import (
+	"os"
+)
 
 /*
 DB_File 数据持久化
