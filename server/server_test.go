@@ -18,11 +18,11 @@ func Test_Server(t *testing.T) {
 			fmt.Println("accept err:", err)
 		}
 
-		*listener.PushChan <- num
-		listener.PushLength += 1
+		*listener.PChan <- num
+		listener.Length += 1
 		go listener.Process(conn)
 
-		fmt.Printf("now %v", listener.PushLength)
+		fmt.Printf("now %v", listener.Length)
 
 	}
 

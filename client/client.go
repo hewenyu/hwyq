@@ -37,7 +37,6 @@ func Client() {
 
 		// 响应服务端信息
 		_, err = client.Write([]byte(input))
-		// _, err = client.Write([]byte(time.Now().Local().String()))
 		if err != nil {
 			fmt.Println("Write failed,err:", err)
 			break
