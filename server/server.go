@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"io"
 	"net"
 
 	"github.com/hewenyu/hwyq/queue"
@@ -65,11 +66,18 @@ func (c *ConnectQueue) Process(conn net.Conn) {
 		var buf [128]byte
 		n, err := conn.Read(buf[:])
 		if err != nil {
-			fmt.Println("Read from tcp server failed,err:", err)
+
+			if err != io.EOF {
+				fmt.Println("Read from tcp server failed,err:", err)
+			}
+
 			break
 		}
 		data := string(buf[:n])
 		fmt.Printf("Recived from client,data:%s\n", data)
 
 	}
+	fmt.Println("链接结束")
+	<-*c.PushChan
+	c.PushLength -= 1
 }
