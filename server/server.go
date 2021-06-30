@@ -8,8 +8,6 @@ import (
 	"github.com/hewenyu/hwyq/queue"
 )
 
-const DefultPort = 8950
-
 /*
 ConnectQueue 链接
 */
@@ -38,9 +36,9 @@ func (c *ConnectQueue) Accept() (conn net.Conn, err error) {
 	return
 }
 
-/*
-NewServer 初始化一个server
-*/
+/**
+ * NewServer 初始化一个server
+ */
 func NewServer() *ConnectQueue {
 	listener, _ := net.ListenTCP("tcp", &net.TCPAddr{IP: net.IPv4zero, Port: DefultPort})
 
