@@ -1,7 +1,7 @@
 package server
 
 const ( 
-	LimitFork = 100  // 最大
+	LimitFork = 100  // 默认的最大链接树
 	DefultPort = 8950 // 端口号
 )
 /**

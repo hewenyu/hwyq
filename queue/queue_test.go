@@ -14,7 +14,7 @@ func push() {
 	for {
 		message = time.Now().Local().String()
 		server.Push(message)
-		time.Sleep(time.Second / 10)
+		time.Sleep(time.Second / 2)
 	}
 }
 
